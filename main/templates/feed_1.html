@@ -29,8 +29,8 @@
         </li>
         </ul>
 
+        <img src="{% static "img/feed1.png" %}" width="400" height="250">
 
-       <img src="{% static "img/meat1.jpg" %}" width="400" height="250">
         <table class="table">
 
             <thead>
@@ -42,29 +42,34 @@
 
             <tbody>
             <tr>
-                <th scope="row">판매상품</th>
-                <td>이천 축협 한우 부채살 300g</td>
+                <th scope="row">사료</th>
+                <td>옥수수 300g</td>
             </tr>
             <tr>
-                <th scope="row">사육농가</th>
-                <td>이천이면소 농장</td>
-            </tr>
-            <tr>
-            <th scope="row">원산지</th>
-            <td>경기도 이천</td>
-            </tr>
-            <tr>
-            <th scope="row">사료 정보</th>
-            <td><button type="button"> 사료정보 찾아보기 </button></td>
+                <th scope="row">원산지</th>
+                <td>경북 구미</td>
             </tr>
             <tr>
             <th scope="row">가격</th>
-            <td>57000원</td>
+            <td>30000원</td>
             </tr>
             </tbody>
         </table>
 
 
+        <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1"> 사료카드(농협 계좌번호) </label>
+            <input type="Number" class="form-control" id="Account" aria-describedby="emailHelp" placeholder="Fin-Account Number">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1"> 결제 금액 </label>
+            <input type="Number" class="form-control" id="Money" aria-describedby="emailHelp" placeholder="결제 금액 입력해주세요">
+        </div>
+
+        <button type="submit" class="btn btn-primary"> 결제하기 </button>
+        </form>
 
 
     <!-- Optional JavaScript -->
