@@ -16,6 +16,9 @@ def feed(request):
 def meat(request):
     return render(request, "meat.html")
 
+# 결과 나오는 페이지
+def result(request):
+    return render(request, "result.html")
 
 # 사료 구매(옥수수)하는 페이지
 def feed_1(request):

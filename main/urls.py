@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^meat_1/$', views.meat_1, name="meat_1"),
     url(r'^meat_2/$', views.meat_2, name="meat_2"),
     url(r'^meat_3/$', views.meat_3, name="meat_3"),
+    url(r'^result/$', views.result, name="result"),
 ]
