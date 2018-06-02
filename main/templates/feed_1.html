@@ -50,5 +50,16 @@
     <button type="submit" class="btn btn-primary"> 결제하기 </button>
     </form>
     {% endif %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if msg %}
+        <script>alert('{{ msg }}');</script>
+    {% endif %}
 
 {% endblock content %}

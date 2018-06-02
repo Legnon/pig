@@ -47,7 +47,8 @@ window.onload = function () {
     <thead>
       <tr>
         <th>Credit Card</th>
-        <th>ts</th>
+        <th>time</th>
+        <!-- <th>ts</th> -->
         <th>element</th>
         <th>amount</th>
       </tr>
@@ -56,7 +57,8 @@ window.onload = function () {
       {%for x in ret%}
       <tr>
         <td>{{x.card}}</td>
-        <td>{{x.ts}}</td>
+        <td>{{x.time}}</td>
+        <!-- <td>{{x.ts}}</td> -->
         <td>{{x.element}}</td>
         <td>{{x.amount}}</td>
       </tr>

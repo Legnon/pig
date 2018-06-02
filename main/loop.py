@@ -1,6 +1,6 @@
 import requests
 import urllib.request
-import json      
+import json
 import datetime
 from pprint import pprint
 import time
@@ -54,7 +54,7 @@ def check_last(min_time, lim_time):
       if ret['tx_data_json'] =='':
         break
       cur = json.loads(ret['tx_data_json'][0]['data_string'])
-      print(cur['params']['ts'])
+      # print(cur['params']['ts'])
       if int(cur['params']['ts']) < min_time:
         break
       if int(cur['params']['ts']) < lim_time:
@@ -72,8 +72,8 @@ def check_chain(_hash):
     return ret
 if __name__ == '__main__':
   ret = check_last(1527946447, 1527946730)
-  for x in ret:
-    print(x)
+  # for x in ret:
+  #   print(x)
 
 	#for x in range(11,20):
 	#   run_transaction(str(x), '1238-1241-2387-7812', 'corn', str(x*10))
