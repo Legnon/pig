@@ -3,7 +3,9 @@ from accounts.models import Resume
 from .forms import OrderForm
 from .loop import run_transaction, check_last
 import random
-
+import time
+import datetime
+import json
 
 # 사료 구매 / 고기 구매
 def main(request):
@@ -21,7 +23,21 @@ def meat(request):
 
 # 결과 나오는 페이지
 def result(request):
-    return render(request, "result.html")
+    ret = check_last(1527952680, 152700952683)
+    dic = {}
+    for x in ['corn', 'rice', 'soybean']:
+        dic[x] = 0
+    for x in ret:
+        if x['card'] == '1238-1241-2387-7812':
+            dic[x['element']] += int(x['amount'])
+    print(ret)
+    return render(request, "result.html", {
+            "corn": int(dic['corn']),
+            "rice": int(dic['rice']),
+            "soybean": int(dic['soybean']),
+            "ret": ret,
+
+        })
 
 # 사료 구매(옥수수)하는 페이지
 def feed_1(request):
