@@ -2,38 +2,20 @@
 {% load staticfiles %}
 {% block content %}
 
-<img src="{% static "img/meat1.jpg" %}" width="400" height="250">
- <table class="table">
+    <br>
 
-     <thead>
-     <tr>
-         <th scope="col">목차</th>
-         <th scope="col">상세내용</th>
-     </tr>
-     </thead>
+    <p> 고기 구매 페이지(3가지의 축산물 종류) </p>
 
-     <tbody>
-     <tr>
-         <th scope="row">판매상품</th>
-         <td>이천 축협 한우 부채살 300g</td>
-     </tr>
-     <tr>
-         <th scope="row">사육농가</th>
-         <td>이천이면소 농장</td>
-     </tr>
-     <tr>
-     <th scope="row">원산지</th>
-     <td>경기도 이천</td>
-     </tr>
-     <tr>
-     <th scope="row">사료 정보</th>
-     <td><button type="button"> 사료정보 찾아보기 </button></td>
-     </tr>
-     <tr>
-     <th scope="row">가격</th>
-     <td>57000원</td>
-     </tr>
-     </tbody>
- </table>
+    <br> <br>
 
-{% endblock content %}
+    <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+    <button type="button" class="btn btn-primary" onclick="location.href='{% url 'main:meat_1' %}'"> 1. 소고기(재현)</button>
+
+    <!-- Indicates caution should be taken with this action -->
+    <button type="button" class="btn btn-warning" onclick="location.href='{% url 'main:meat_2' %}'">  2. 돼지고기(현택)</button>
+
+    <!-- Indicates a dangerous or potentially negative action -->
+    <button type="button" class="btn btn-danger" onclick="location.href='{% url 'main:meat_3' %}'"></a> 3. 닭고기(하늘)</button>
+
+
+{% endblock %}

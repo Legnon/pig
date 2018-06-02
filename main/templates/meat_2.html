@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<img src="{% static "img/meat1.jpg" %}" width="400" height="250">
+ <table class="table">
+
+     <thead>
+     <tr>
+         <th scope="col">목차</th>
+         <th scope="col">상세내용</th>
+     </tr>
+     </thead>
+
+     <tbody>
+     <tr>
+         <th scope="row">판매상품</th>
+         <td>한림농협 제주돼지 뒷다리3호 5kg</td>
+     </tr>
+     <tr>
+         <th scope="row">사육농가</th>
+         <td>현택 농장</td>
+     </tr>
+     <tr>
+     <th scope="row">원산지</th>
+     <td>제주도</td>
+     </tr>
+     <tr>
+     <th scope="row">사료 정보</th>
+     <td><button type="button"> 사료정보 찾아보기 </button></td>
+     </tr>
+     <tr>
+     <th scope="row">가격</th>
+     <td>57000원</td>
+     </tr>
+     </tbody>
+ </table>
+
+{% endblock content %

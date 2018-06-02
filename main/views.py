@@ -40,3 +40,24 @@ def feed_3(request):
         "card": resume.card,
     })
 
+#  고기 구매(소고기)하는 페이지
+def meat_1(request):
+    resume = Resume.objects.get(user=request.user)
+    return render(request, "meat_1.html", {
+        "card": resume.card,
+    })
+
+# 사료 구매(대두박)하는 페이지
+def meat_2(request):
+    resume = Resume.objects.get(user=request.user)
+    return render(request, "meat_2.html", {
+        "card": resume.card,
+    })
+
+# 사료 구매(대두박)하는 페이지
+def meat_3(request):
+    resume = Resume.objects.get(user=request.user)
+    return render(request, "meat_3.html", {
+        "card": resume.card,
+    })
+
