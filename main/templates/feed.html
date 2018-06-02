@@ -4,14 +4,18 @@
 
     <br>
 
-    <a href="{% url 'main:feed_1' %}" type="button"> 1. 옥수수 </a>
+    <p> 사료 구매 페이지(3가지의 사료 종류) </p>
 
     <br> <br>
 
-    <a href="{% url 'main:feed_2' %}" type="button"> 2. 쌀겨 </a>
+    <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+    <button type="button" class="btn btn-primary" onclick="location.href='{% url 'main:feed_1' %}'"> 1. 옥수수 300g</button>
 
-    <br> <br>
+    <!-- Indicates caution should be taken with this action -->
+    <button type="button" class="btn btn-warning" onclick="location.href='{% url 'main:feed_2' %}'">  2. 쌀겨 200g</button>
 
-    <a href="{% url 'main:feed_3' %}" type="button"> 3. 대두박 </a>
+    <!-- Indicates a dangerous or potentially negative action -->
+    <button type="button" class="btn btn-danger" onclick="location.href='{% url 'main:feed_3' %}'"></a> 3. 대두박 150g</button>
+
 
 {% endblock %}
