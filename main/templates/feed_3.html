@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load bootstrap3 %}
 {% block content %}
 
     <img src="{% static "img/feed3.png" %}" width="400" height="250">
@@ -31,6 +32,10 @@
 
 
     {% if card %}
+    <form method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <!--
     <form>
     <div class="form-group">
         <label for="exampleInputEmail1"> 사료카드(농협 계좌번호) </label>
@@ -42,6 +47,7 @@
         <label for="exampleInputEmail1"> 결제 금액 </label>
         <input type="Number" class="form-control" id="Money" aria-describedby="emailHelp" placeholder="" value="11">
     </div>
+    -->
 
     <button type="submit" class="btn btn-primary"> 결제하기 </button>
     </form>

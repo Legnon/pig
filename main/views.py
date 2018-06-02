@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from accounts.models import Resume
 from .forms import OrderForm
 from .loop import run_transaction, check_last
-import random
 
 
 # 사료 구매 / 고기 구매
@@ -19,9 +18,11 @@ def feed(request):
 def meat(request):
     return render(request, "meat.html")
 
+
 # 결과 나오는 페이지
 def result(request):
     return render(request, "result.html")
+
 
 # 사료 구매(옥수수)하는 페이지
 def feed_1(request):
@@ -46,24 +47,44 @@ def feed_1(request):
 
 # 사료 구매(쌀겨)하는 페이지
 def feed_2(request):
+    if request.method == "POST":
+        form = OrderForm(request.POST, request.FILES)
+        if form.is_valid():
+            run_transaction(0, form.cleaned_data['card'], form.cleaned_data['element'], int(form.cleaned_data['amount']) * 200)
+        return redirect("main:feed_2")
+    else:
+        form = OrderForm(initial={'card': request.user.resume_set.card, 'element': 'rice', 'amount': 1})
     if Resume.objects.filter(user=request.user).exists():
         resume = Resume.objects.get(user=request.user)
         return render(request, "feed_2.html", {
             "card": resume.card,
+            "form": form,
         })
     else:
-        return render(request, "feed_2.html")
+        return render(request, "feed_2.html", {
+            "form": form,
+        })
 
 
 # 사료 구매(대두박)하는 페이지
 def feed_3(request):
+    if request.method == "POST":
+        form = OrderForm(request.POST, request.FILES)
+        if form.is_valid():
+            run_transaction(0, form.cleaned_data['card'], form.cleaned_data['element'], int(form.cleaned_data['amount']) * 150)
+        return redirect("main:feed_3")
+    else:
+        form = OrderForm(initial={'card': request.user.resume_set.card, 'element': 'soybean', 'amount': 1})
     if Resume.objects.filter(user=request.user).exists():
         resume = Resume.objects.get(user=request.user)
         return render(request, "feed_3.html", {
             "card": resume.card,
+            "form": form,
         })
     else:
-        return render(request, "feed_3.html")
+        return render(request, "feed_3.html", {
+            "form": form,
+        })
 
 
 # 고기 구매(소고기)하는 페이지
