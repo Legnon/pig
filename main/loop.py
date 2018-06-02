@@ -15,7 +15,7 @@ def run_transaction(_id, card, element, amount):
             "method": "invoke_foo1",
             "params": {
                 "card" : card,
-                "ts" : datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S'),
+                "ts" : int(time.mktime(datetime.datetime.now().timetuple())),
                 "element": element,
                 "amount": amount
                 }
@@ -42,7 +42,7 @@ def is_valid(tx_hash):
 
 #input: channel
 #localhost:9000/api/v1/blocks?channel=channel1
-def check_last():
+def check_last(min_time, lim_time):
     main = []
     prefix = 'api/v1/blocks?channel=channel1'
     response = requests.get(host+prefix)
@@ -54,12 +54,13 @@ def check_last():
       if ret['tx_data_json'] =='':
         break
       cur = json.loads(ret['tx_data_json'][0]['data_string'])
-      print(cur)
-      main.append({'card': cur['params']['card'], 'ts': cur['params']['ts'], 'element': cur['params']['element'], 'amount': cur['params']['amount']})
+      print(cur['params']['ts'])
+      if int(cur['params']['ts']) < min_time:
+        break
+      if int(cur['params']['ts']) < lim_time:
+        main.append({'card': cur['params']['card'], 'ts': cur['params']['ts'], 'element': cur['params']['element'], 'amount': cur['params']['amount']})
 
-    for x in main:
-      print(x)
-    return ret
+    return main
 
 #input: hash, channel
 #localhost:9000/api/v1/blocks?channel=channel1&hash={hash}
@@ -69,12 +70,11 @@ def check_chain(_hash):
     assert response.status_code == requests.codes.ok
     ret = json.loads(response.text)
     return ret
+if __name__ == '__main__':
+  ret = check_last(1527946447, 1527946730)
+  for x in ret:
+    print(x)
 
-
-check_last()
-#is_valid('bca4123c5e2f9c855af81393ee57a40f618b236e293b54fab650fe3b40d7449d')
-
-# for x in range(11, 20):
-#   time.sleep(2)
-#   run_transaction(str(x), str(x+1), 'rice', str(x*10))
-
+	#for x in range(11,20):
+	#   run_transaction(str(x), '1238-1241-2387-7812', 'corn', str(x*10))
+	#   time.sleep(2)
