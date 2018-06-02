@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from accounts.models import Resume
+from .forms import OrderForm
+from .loop import run_transaction, check_last
+import random
 
 
 # 사료 구매 / 고기 구매
@@ -22,13 +25,23 @@ def result(request):
 
 # 사료 구매(옥수수)하는 페이지
 def feed_1(request):
+    if request.method == "POST":
+        form = OrderForm(request.POST, request.FILES)
+        if form.is_valid():
+            run_transaction(0, form.cleaned_data['card'], form.cleaned_data['element'], int(form.cleaned_data['amount']) * 300)
+        return redirect("main:feed_1")
+    else:
+        form = OrderForm(initial={'card': request.user.resume_set.card, 'element': 'corn', 'amount': 1})
     if Resume.objects.filter(user=request.user).exists():
         resume = Resume.objects.get(user=request.user)
         return render(request, "feed_1.html", {
             "card": resume.card,
+            "form": form,
         })
     else:
-        return render(request, "feed_1.html")
+        return render(request, "feed_1.html", {
+            "form": form,
+        })
 
 
 # 사료 구매(쌀겨)하는 페이지
