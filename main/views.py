@@ -21,7 +21,7 @@ def meat(request):
 
 
 # 결과 나오는 페이지
-def result(request):
+def result(request, id):
     ret = check_last(1527952680, 152700952683)
     b_ret = []
     dic = {}
@@ -29,9 +29,18 @@ def result(request):
         dic[x] = 0
     for x in ret:
         # print(x['card'])
-        if x['card'] == '1238-1241-2387-7812':
-            dic[x['element']] += int(x['amount'])
-            b_ret.append(x)
+        if id == "1":
+            if x['card'] == '1238-1241-2387-7812':
+                dic[x['element']] += int(x['amount'])
+                b_ret.append(x)
+        elif id == "2":
+            if x['card'] == '8162-1284-6827-1362':
+                dic[x['element']] += int(x['amount'])
+                b_ret.append(x)
+        elif id == "3":
+            if x['card'] == '2848-3619-9519-2931':
+                dic[x['element']] += int(x['amount'])
+                b_ret.append(x)
     # print(ret)
     return render(request, "result.html", {
         "corn": int(dic['corn']),
