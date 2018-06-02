@@ -12,3 +12,9 @@ class Order(models.Model):
     card = models.CharField(max_length=20)
     element = models.CharField(max_length=20)
     amount = models.CharField(max_length=20)
+
+
+class Meat(models.Model):
+    name = models.CharField(max_length=10)
+    start_date = models.IntegerField()
+    end_date = models.IntegerField()
