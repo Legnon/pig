@@ -1,7 +1,7 @@
 import socket
 
 
-def run_server(port=4000, input_data="2:10"):
+def run_server(port=4001, input_data="2:10"):
     host = ''
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind((host, port))
@@ -9,10 +9,15 @@ def run_server(port=4000, input_data="2:10"):
         conn, addr = s.accept()
         msg = conn.recv(1024)
         print("Local : " + msg.decode())
-        inp = input("Django server : ")
-        conn.sendall(inp.en4)
+        conn.sendall(input_data.encode())
+        msg = conn.recv(1024)
         print("Local : " + msg.decode())
+        message = msg.decode()
         conn.close()
+        print(message)
 
-        return msg.decode()
+        return message
 
+
+if __name__ == "__main__":
+    run_server()
