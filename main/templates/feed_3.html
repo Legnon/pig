@@ -53,4 +53,9 @@
     </form>
     {% endif %}
 
+    {% if msg %}
+        <script>alert('{{ msg }}');</script>
+    {% endif %}
+
+
 {% endblock content %}

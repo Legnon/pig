@@ -52,4 +52,9 @@
     <button type="submit" class="btn btn-primary"> 결제하기 </button>
     </form>
     {% endif %}
+
+    {% if msg %}
+        <script>alert('{{ msg }}');</script>
+    {% endif %}
+
 {% endblock content %}

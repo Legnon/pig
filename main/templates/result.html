@@ -18,9 +18,9 @@ window.onload = function () {
             showInLegend: true,
             legendText: "{indexLabel}",
             dataPoints: [
-                { y: 4181563, indexLabel: "옥수수" },
-                { y: 2175498, indexLabel: "쌀겨" },
-                { y: 3125844, indexLabel: "대두박" },
+                { y: {{ corn }}, indexLabel: "옥수수" },
+                { y: {{ rice }}, indexLabel: "쌀겨" },
+                { y: {{ soybean }}, indexLabel: "대두박" },
             ]
         }
         ]
@@ -29,8 +29,43 @@ window.onload = function () {
 }
 </script>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+
 <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+<br>
+<div class="container">
+  <h2>Block Chain data</h2>
+  <p>Table</p>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Credit Card</th>
+        <th>ts</th>
+        <th>element</th>
+        <th>amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%for x in ret%}
+      <tr>
+        <td>{{x.card}}</td>
+        <td>{{x.ts}}</td>
+        <td>{{x.element}}</td>
+        <td>{{x.amount}}</td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+</div>
+
+
+
 </body>
 </html>

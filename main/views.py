@@ -22,7 +22,23 @@ def meat(request):
 
 # 결과 나오는 페이지
 def result(request):
-    return render(request, "result.html")
+    ret = check_last(1527952680, 152700952683)
+    b_ret = []
+    dic = {}
+    for x in ['corn', 'rice', 'soybean']:
+        dic[x] = 0
+    for x in ret:
+        # print(x['card'])
+        if x['card'] == '1238-1241-2387-7812':
+            dic[x['element']] += int(x['amount'])
+            b_ret.append(x)
+    # print(ret)
+    return render(request, "result.html", {
+        "corn": int(dic['corn']),
+        "rice": int(dic['rice']),
+        "soybean": int(dic['soybean']),
+        "ret": b_ret,
+    })
 
 
 # 사료 구매(옥수수)하는 페이지
@@ -31,7 +47,7 @@ def feed_1(request):
         form = OrderForm(request.POST, request.FILES)
         if form.is_valid():
             run_transaction(0, form.cleaned_data['card'], form.cleaned_data['element'], int(form.cleaned_data['amount']) * 300)
-            msg = run_server(4000, "2:10")
+            msg = run_server(4000, "2:" + str(30 * form.cleaned_data['amount']))
         resume = Resume.objects.get(user=request.user)
         return render(request, "feed_1.html", {
             "card": resume.card,
@@ -58,7 +74,13 @@ def feed_2(request):
         form = OrderForm(request.POST, request.FILES)
         if form.is_valid():
             run_transaction(0, form.cleaned_data['card'], form.cleaned_data['element'], int(form.cleaned_data['amount']) * 200)
-        return redirect("main:feed_2")
+            msg = run_server(4000, "2:" + str(25 * form.cleaned_data['amount']))
+        resume = Resume.objects.get(user=request.user)
+        return render(request, "feed_2.html", {
+            "card": resume.card,
+            "form": form,
+            "msg": msg,
+        })
     else:
         form = OrderForm(initial={'card': request.user.resume_set.card, 'element': 'rice', 'amount': 1})
     if Resume.objects.filter(user=request.user).exists():
@@ -79,7 +101,13 @@ def feed_3(request):
         form = OrderForm(request.POST, request.FILES)
         if form.is_valid():
             run_transaction(0, form.cleaned_data['card'], form.cleaned_data['element'], int(form.cleaned_data['amount']) * 150)
-        return redirect("main:feed_3")
+            msg = run_server(4000, "2:" + str(11 * form.cleaned_data['amount']))
+        resume = Resume.objects.get(user=request.user)
+        return render(request, "feed_3.html", {
+            "card": resume.card,
+            "form": form,
+            "msg": msg,
+        })
     else:
         form = OrderForm(initial={'card': request.user.resume_set.card, 'element': 'soybean', 'amount': 1})
     if Resume.objects.filter(user=request.user).exists():
@@ -116,4 +144,3 @@ def meat_3(request):
     return render(request, "meat_3.html", {
         # "location": resume.location,
     })
-
