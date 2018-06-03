@@ -3,6 +3,7 @@ from accounts.models import Resume
 from .forms import OrderForm
 from .loop import run_transaction, check_last
 
+
 import random
 import time
 import datetime
@@ -64,9 +65,11 @@ def feed_1(request):
         form = OrderForm(request.POST, request.FILES)
         if form.is_valid():
             run_transaction(0, form.cleaned_data['card'], form.cleaned_data['element'], int(form.cleaned_data['amount']) * 300)
-            print("2:" + str(30 * int(form.cleaned_data['amount'])))
-            msg = run_server(4001, "2:" + str(30 * int(form.cleaned_data['amount'])))
+            # print("2:" + str(30 * int(form.cleaned_data['amount'])))
+            # msg = run_server(4001, "2:" + str(30 * int(form.cleaned_data['amount'])))
+        time.sleep(5)
         resume = Resume.objects.get(user=request.user)
+        msg = "결제 완료!"
         return render(request, "feed_1.html", {
             "card": resume.card,
             "form": form,
@@ -92,8 +95,11 @@ def feed_2(request):
         form = OrderForm(request.POST, request.FILES)
         if form.is_valid():
             run_transaction(0, form.cleaned_data['card'], form.cleaned_data['element'], int(form.cleaned_data['amount']) * 200)
-            msg = run_server(4001, "2:" + str(25 * int(form.cleaned_data['amount'])))
+        #     msg = run_server(4001, "2:" + str(25 * int(form.cleaned_data['amount'])))
+        # resume = Resume.objects.get(user=request.user)
+        time.sleep(5)
         resume = Resume.objects.get(user=request.user)
+        msg = "결제 완료!"
         return render(request, "feed_2.html", {
             "card": resume.card,
             "form": form,
@@ -119,8 +125,11 @@ def feed_3(request):
         form = OrderForm(request.POST, request.FILES)
         if form.is_valid():
             run_transaction(0, form.cleaned_data['card'], form.cleaned_data['element'], int(form.cleaned_data['amount']) * 150)
-            msg = run_server(4001, "2:" + str(11 * int(form.cleaned_data['amount'])))
+        #     msg = run_server(4001, "2:" + str(11 * int(form.cleaned_data['amount'])))
+        # resume = Resume.objects.get(user=request.user)
+        time.sleep(5)
         resume = Resume.objects.get(user=request.user)
+        msg = "결제 완료!"
         return render(request, "feed_3.html", {
             "card": resume.card,
             "form": form,
